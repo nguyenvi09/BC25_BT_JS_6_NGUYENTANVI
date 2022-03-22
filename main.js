@@ -49,3 +49,19 @@ $("tinhTong").onclick = function(){
 
     $("ketQua").innerHTML = "Tổng là: " + s;
 };
+
+/**
+ * BT3: Nhập vào n. Tính giai thừa 1*2*...n
+ * 
+ */
+
+$("tinhGiaiThua").onclick = function(){
+    var n = $("layGiaiThua").value;
+    var ketQua = 1;
+
+    for(i = 1; i <= n; i++){
+        ketQua *= i;
+    };
+
+    $("ketQuaGiaiThua").innerHTML = ketQua;
+};
