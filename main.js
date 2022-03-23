@@ -53,6 +53,13 @@ $("tinhTong").onclick = function(){
 /**
  * BT3: Nhập vào n. Tính giai thừa 1*2*...n
  * 
+ * - Đầu vào: người dùng nhập n
+ * 
+ * - Xử lý: 
+ * B1: tạo i là biến đếm tăng từ 1 -> n
+ * B2: tính ketQua lũy tiến bằng phép nhân
+ * 
+ * - Đầu ra: in kết quả ra màn hình
  */
 
 $("tinhGiaiThua").onclick = function(){
@@ -64,4 +71,31 @@ $("tinhGiaiThua").onclick = function(){
     };
 
     $("ketQuaGiaiThua").innerHTML = ketQua;
+};
+
+/**
+ * BT4: Hãy viết chương trình khi click vào button sẽ in ra 10 thẻ div
+ * Nếu div nào vị trí chẵn thì background màu đỏ và lẻ thì background màu xanh
+ * 
+ * - Đầu vào: 10 thẻ div
+ * 
+ * - Xử lý: 
+ * B1: lặp tăng i
+ * B2: kiểm tra chẵn lẻ -> gán thẻ div và style cho biến tích lũy
+ * 
+ * - Đầu ra: in kết quả ra màn hình;
+ * 
+ */
+
+$("taoDiv").onclick = function(){
+    var ketQuaTao = "";
+    for(i = 1; i <= 10; i++){
+        if(i % 2 == 0){
+            ketQuaTao += "<div style='background-color: blue; font-weight: bold'>Div chẵn số " + i + "</div>";
+        }else{
+            ketQuaTao += "<div style='background-color: red; font-weight: bold'>Div lẻ số " + i + "</div>";
+        };
+    };
+
+    $("ketQuaTaoTheDiv").innerHTML = ketQuaTao;
 };
