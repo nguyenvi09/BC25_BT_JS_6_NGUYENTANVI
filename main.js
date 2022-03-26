@@ -1,18 +1,30 @@
 let $ = document.getElementById.bind(document);
+var currentFormat = new Intl.NumberFormat("vn-VN");
 /**
  * BT1
  * Tìm số nguyên dương nhỏ nhất sao cho:
  *     1 + 2 + ... + n > 10000
  * 
+ * - Đầu vào: khởi tạo tong = 0; dem = 0
+ * 
+ * - Xử lý: 
+ * B1: cho đk dừng tong < 10000 
+ * B2: tăng biến đếm 1 đv 
+ * B3: tính tích lũy tong = tong + dem
+ * 
+ * - Đầu ra: in ra kết quả đếm 
+ * 
  */
 var tong = 0;
-var n = 0;
+var dem = 0;
 
 while(tong < 10000){
-    n++;
-    tong += n;
+    dem++;
+    // console.log(dem);
+    tong += dem;
+    // console.log(tong);
 }
-document.getElementById("soNguyenDuongNhoNhat").innerHTML = "Số nguyên dương nhỏ nhất sao cho 1 + 2 + ... + n > 10000 là: " + n;
+document.getElementById("soNguyenDuongNhoNhat").innerHTML = "Số nguyên dương nhỏ nhất sao cho 1 + 2 + ... + n > 10000 là: " + dem;
 
 /**
  * BT2: viết chương trình nhập vào 2 số x,n tính tổng
@@ -21,33 +33,37 @@ document.getElementById("soNguyenDuongNhoNhat").innerHTML = "Số nguyên dươn
  * - Đầu vào: x, n là 2 số người dùng nhập
  * 
  * - Xử lý:
- * B1: tạo hàm tính lũy thừa
- * B2: gán s = 0 là giá trị tổng ban đầu để tính cộng dồn
- * tạo i = 1, i giá trị lũy thừa 
- * B3: dùng do while tính tổng
+ * B1: tạo hàm tính tổng 
+ * B2: bắt sự kiện click -> gọi hàm tinhTongLuyThua
  * 
  * - Đầu ra: in kết quả ra màn hình
  *  */
 
 
-function tinhLuyThua(x, i){
-    return Math.pow(x, i);
-};
+function tinhTongLuyThua(x, n){
+    //tạo s là tổng
+    var s = 0;
+    // biến i = 1 là số mũ đầu tiên
+    var i = 1;
 
+    //dùng do while để thực thi trước số mũ mặc định đầu tiên là 1
+    // S(n) = x^1 + x^2 + ... + x^n
+    do{
+        s += Math.pow(x, i);
+        i++;
+    }while(i <= n);
+
+    return s;
+}
 
 $("tinhTong").onclick = function(){
     var x = $("layX").value *1;
     var n = $("layN").value *1;
-    var s = 0;
-    var i = 1;
+    var ketQua;
+    
+    ketQua = tinhTongLuyThua(x, n);
 
-    do{
-        s += tinhLuyThua(x, i);
-        i++;
-    }while(i <= n);
-
-
-    $("ketQua").innerHTML = "Tổng là: " + s;
+    $("ketQua").innerHTML = "Tổng là: " + currentFormat.format(ketQua);
 };
 
 /**
@@ -56,21 +72,28 @@ $("tinhTong").onclick = function(){
  * - Đầu vào: người dùng nhập n
  * 
  * - Xử lý: 
- * B1: tạo i là biến đếm tăng từ 1 -> n
- * B2: tính ketQua lũy tiến bằng phép nhân
+ * B1: tạo hàm tinhGiaiThua(n)
+ * B2: click -> gọi hàm gán ketQua
  * 
  * - Đầu ra: in kết quả ra màn hình
  */
-
-$("tinhGiaiThua").onclick = function(){
-    var n = $("layGiaiThua").value;
+function tinhGiaiThua(n){
     var ketQua = 1;
 
     for(i = 1; i <= n; i++){
         ketQua *= i;
     };
 
-    $("ketQuaGiaiThua").innerHTML = ketQua;
+    return ketQua;
+}
+
+$("tinhGiaiThua").onclick = function(){
+    var n = $("layGiaiThua").value;
+    var ketQua;
+
+    ketQua = tinhGiaiThua(n);
+
+    $("ketQuaGiaiThua").innerHTML = currentFormat.format(ketQua);
 };
 
 /**
